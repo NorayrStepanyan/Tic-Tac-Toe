@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/yellow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/viewWinPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repeat" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/thirdRow"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="1sp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/thirdRow1"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shapeinbottomleft"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/thirdRow2"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/thirdRow3"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shapeinbottomright"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/firsTrow"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="1sp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/secondRow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/firsTrow1"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+               android:background="@drawable/shapeintopleft"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/firsTrow2"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/firsTrow3"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shapeintopright"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/secondRow"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="1sp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/thirdRow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/secondRow1"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/secondRow2"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/secondRow3"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="1sp"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/repeat"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/shapeoval"
+        android:contentDescription="TODO"
+        android:src="@drawable/baseline_repeat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
