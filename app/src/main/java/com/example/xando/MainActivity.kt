@@ -3,14 +3,10 @@ package com.example.xando
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 
 open class MainActivity : AppCompatActivity() {
@@ -21,8 +17,9 @@ open class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var checkXAndO = true
+        var checker = true
 
-        val viewWinPlayer = findViewById<TextView>(R.id.viewWinPlayer)
+
         val repeat = findViewById<ImageButton>(R.id.repeat)
         repeat.visibility = View.GONE
 
@@ -40,7 +37,9 @@ open class MainActivity : AppCompatActivity() {
 
 
         repeat.setOnClickListener {
+            checker = true
             checkXAndO = true
+
             firsTrow1.text = ""
             firsTrow2.text = ""
             firsTrow3.text = ""
@@ -53,823 +52,288 @@ open class MainActivity : AppCompatActivity() {
             thirdRow2.text = ""
             thirdRow3.text = ""
             repeat.visibility = View.GONE
-            viewWinPlayer.text = ""
+        }
+
+        fun checkWinner(player: String): Boolean {
+            if (firsTrow1.text == player && firsTrow2.text == player && firsTrow3.text == player) return true
+            if (secondRow1.text == player && secondRow2.text == player && secondRow3.text == player) return true
+            if (thirdRow1.text == player && thirdRow2.text == player && thirdRow3.text == player) return true
+
+            if (firsTrow1.text == player && secondRow1.text == player && thirdRow1.text == player) return true
+            if (firsTrow2.text == player && secondRow2.text == player && thirdRow2.text == player) return true
+            if (firsTrow3.text == player && secondRow3.text == player && thirdRow3.text == player) return true
+
+            if (firsTrow1.text == player && secondRow2.text == player && thirdRow3.text == player) return true
+            if (firsTrow3.text == player && secondRow2.text == player && thirdRow1.text == player) return true
+
+            return false
         }
 
 
         // firsTrow
-
         firsTrow1.setOnClickListener {
-
-            if (firsTrow1.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                firsTrow1.text = "X"
-
-            } else if (firsTrow1.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                firsTrow1.text = "O"
+            if (checker) {
+                if (firsTrow1.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    firsTrow1.text = "X"
+                } else if (firsTrow1.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    firsTrow1.text = "O"
+                }
             }
-            if (firsTrow1.text.contains("X") && firsTrow2.text.contains("X") && firsTrow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && firsTrow2.text.contains("O") && firsTrow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                if (checkWinner("X")) {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Player for X win",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    repeat.visibility = View.VISIBLE
+                    checker = false
+                } else if (checkWinner("O")) {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Player for O win",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    repeat.visibility = View.VISIBLE
+                    checker = false
+                }
             }
-
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow1.text.contains("X") && thirdRow1.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow1.text.contains("O") && thirdRow1.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-        }
-
-
 
         firsTrow2.setOnClickListener {
-
-            if (firsTrow2.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                firsTrow2.text = "X"
-            } else if (firsTrow2.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                firsTrow2.text = "O"
+            if (checker) {
+                if (firsTrow2.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    firsTrow2.text = "X"
+                } else if (firsTrow2.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    firsTrow2.text = "O"
+                }
             }
-            if (firsTrow1.text.contains("X") && firsTrow2.text.contains("X") && firsTrow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && firsTrow2.text.contains("O") && firsTrow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow2.text.contains("X") && secondRow2.text.contains("X") && thirdRow2.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow2.text.contains("O") && secondRow2.text.contains("O") && thirdRow2.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
 
-
         firsTrow3.setOnClickListener {
-
-            if (firsTrow3.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                firsTrow3.text = "X"
-            } else if (firsTrow3.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                firsTrow3.text = "O"
+            if (checker) {
+                if (firsTrow3.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    firsTrow3.text = "X"
+                } else if (firsTrow3.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    firsTrow3.text = "O"
+                }
             }
-            if (firsTrow1.text.contains("X") && firsTrow2.text.contains("X") && firsTrow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && firsTrow2.text.contains("O") && firsTrow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow3.text.contains("X") && secondRow2.text.contains("X") && thirdRow1.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow3.text.contains("O") && secondRow2.text.contains("O") && thirdRow1.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow3.text.contains("X") && secondRow3.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow3.text.contains("O") && secondRow3.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
 
 
         // secondRow
-
         secondRow1.setOnClickListener {
-
-            if (secondRow1.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                secondRow1.text = "X"
-            } else if (secondRow1.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                secondRow1.text = "O"
+            if (checker) {
+                if (secondRow1.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    secondRow1.text = "X"
+                } else if (secondRow1.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    secondRow1.text = "O"
+                }
             }
-            if (secondRow1.text.contains("X") && secondRow2.text.contains("X") && secondRow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (secondRow1.text.contains("O") && secondRow2.text.contains("O") && secondRow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow1.text.contains("X") && thirdRow1.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow1.text.contains("O") && thirdRow1.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
-
 
         secondRow2.setOnClickListener {
-
-            if (secondRow2.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                secondRow2.text = "X"
-            } else if (secondRow2.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                secondRow2.text = "O"
+            if (checker) {
+                if (secondRow2.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    secondRow2.text = "X"
+                } else if (secondRow2.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    secondRow2.text = "O"
+                }
             }
-            if (secondRow1.text.contains("X") && secondRow2.text.contains("X") && secondRow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (secondRow1.text.contains("O") && secondRow2.text.contains("O") && secondRow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow1.text.contains("X") && thirdRow1.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow1.text.contains("O") && thirdRow1.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow2.text.contains("X") && secondRow2.text.contains("X") && thirdRow2.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow2.text.contains("O") && secondRow2.text.contains("O") && thirdRow2.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
 
-
         secondRow3.setOnClickListener {
-
-            if (secondRow3.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                secondRow3.text = "X"
-            } else if (secondRow3.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                secondRow3.text = "O"
+            if (checker) {
+                if (secondRow3.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    secondRow3.text = "X"
+                } else if (secondRow3.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    secondRow3.text = "O"
+                }
             }
-            if (secondRow1.text.contains("X") && secondRow2.text.contains("X") && secondRow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (secondRow1.text.contains("O") && secondRow2.text.contains("O") && secondRow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow3.text.contains("X") && secondRow3.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow3.text.contains("O") && secondRow3.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
 
 
         // thirdRow
-
         thirdRow1.setOnClickListener {
-
-            if (thirdRow1.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                thirdRow1.text = "X"
-            } else if (thirdRow1.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                thirdRow1.text = "O"
+            if (checker) {
+                if (thirdRow1.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    thirdRow1.text = "X"
+                } else if (thirdRow1.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    thirdRow1.text = "O"
+                }
             }
-            if (thirdRow1.text.contains("X") && thirdRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (thirdRow1.text.contains("O") && thirdRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow3.text.contains("X") && secondRow2.text.contains("X") && thirdRow1.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow3.text.contains("O") && secondRow2.text.contains("O") && thirdRow1.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow1.text.contains("X") && thirdRow1.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow1.text.contains("O") && thirdRow1.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
-
 
         thirdRow2.setOnClickListener {
-
-            if (thirdRow2.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                thirdRow2.text = "X"
-            } else if (thirdRow2.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                thirdRow2.text = "O"
+            if (checker) {
+                if (thirdRow2.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    thirdRow2.text = "X"
+                } else if (thirdRow2.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    thirdRow2.text = "O"
+                }
             }
-            if (thirdRow1.text.contains("X") && thirdRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (thirdRow1.text.contains("O") && thirdRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow2.text.contains("X") && secondRow2.text.contains("X") && thirdRow2.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow2.text.contains("O") && secondRow2.text.contains("O") && thirdRow2.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
 
-
         thirdRow3.setOnClickListener {
-
-            if (thirdRow3.text.isEmpty() && checkXAndO) {
-                checkXAndO = false
-                thirdRow3.text = "X"
-            } else if (thirdRow3.text.isEmpty() && !checkXAndO) {
-                checkXAndO = true
-                thirdRow3.text = "O"
+            if (checker) {
+                if (thirdRow3.text.isEmpty() && checkXAndO) {
+                    checkXAndO = false
+                    thirdRow3.text = "X"
+                } else if (thirdRow3.text.isEmpty() && !checkXAndO) {
+                    checkXAndO = true
+                    thirdRow3.text = "O"
+                }
             }
-            if (thirdRow1.text.contains("X") && thirdRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
+            if (checkWinner("X")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for X win",
+                    "Player for X win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            } else if (thirdRow1.text.contains("O") && thirdRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
+                checker = false
+            } else if (checkWinner("O")) {
                 Snackbar.make(
                     findViewById(android.R.id.content),
-                    "player for O win",
+                    "Player for O win",
                     Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow3.text.contains("X") && secondRow3.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow3.text.contains("O") && secondRow3.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.contains("X") && secondRow2.text.contains("X") && thirdRow3.text.contains(
-                    "X"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for X win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            } else if (firsTrow1.text.contains("O") && secondRow2.text.contains("O") && thirdRow3.text.contains(
-                    "O"
-                )
-            ) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "player for O win",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
-            }
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) {
-                viewWinPlayer.text = " "
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "draw",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                repeat.visibility = View.VISIBLE
+                checker = false
             }
         }
     }
 }
-
-
-
