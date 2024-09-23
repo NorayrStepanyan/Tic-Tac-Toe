@@ -81,24 +81,20 @@ open class MainActivity : AppCompatActivity() {
                     firsTrow1.text = "O"
                 }
             }
-                if (checkWinner("X")) {
-                    Snackbar.make(
-                        findViewById(android.R.id.content),
-                        "Player for X win",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                    repeat.visibility = View.VISIBLE
-                    checker = false
-                } else if (checkWinner("O")) {
-                    Snackbar.make(
-                        findViewById(android.R.id.content),
-                        "Player for O win",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                    repeat.visibility = View.VISIBLE
-                    checker = false
-                }
+            if (checkWinner("X")) {
+                Snackbar.make(
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
+                ).show()
+                repeat.visibility = View.VISIBLE
+                checker = false
+            } else if (checkWinner("O")) {
+                Snackbar.make(
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
+                ).show()
+                repeat.visibility = View.VISIBLE
+                checker = false
             }
+        }
 
         firsTrow2.setOnClickListener {
             if (checker) {
@@ -112,17 +108,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -141,17 +133,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -172,17 +160,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -201,17 +185,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -230,17 +210,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -261,17 +237,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -290,17 +262,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
@@ -319,17 +287,13 @@ open class MainActivity : AppCompatActivity() {
             }
             if (checkWinner("X")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for X win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
             } else if (checkWinner("O")) {
                 Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Player for O win",
-                    Snackbar.LENGTH_LONG
+                    findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG
                 ).show()
                 repeat.visibility = View.VISIBLE
                 checker = false
