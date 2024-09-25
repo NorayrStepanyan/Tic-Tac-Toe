@@ -7,87 +7,79 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.xando.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
 open class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     @SuppressLint("MissingInflatedId", "SetTextI18n", "ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         var checkXAndO = true
         var checker = true
 
 
-        val repeat = findViewById<ImageButton>(R.id.repeat)
-        repeat.visibility = View.GONE
-
-        val firsTrow1 = findViewById<TextView>(R.id.firsTrow1)
-        val firsTrow2 = findViewById<TextView>(R.id.firsTrow2)
-        val firsTrow3 = findViewById<TextView>(R.id.firsTrow3)
-
-        val secondRow1 = findViewById<TextView>(R.id.secondRow1)
-        val secondRow2 = findViewById<TextView>(R.id.secondRow2)
-        val secondRow3 = findViewById<TextView>(R.id.secondRow3)
-
-        val thirdRow1 = findViewById<TextView>(R.id.thirdRow1)
-        val thirdRow2 = findViewById<TextView>(R.id.thirdRow2)
-        val thirdRow3 = findViewById<TextView>(R.id.thirdRow3)
+        binding.repeat
+        binding.repeat.visibility = View.GONE
 
 
-        repeat.setOnClickListener {
+        binding.repeat.setOnClickListener {
             checker = true
             checkXAndO = true
 
-            firsTrow1.text = ""
-            firsTrow2.text = ""
-            firsTrow3.text = ""
+            binding.firsTrow1.text = ""
+            binding.firsTrow2.text = ""
+            binding.firsTrow3.text = ""
 
-            secondRow1.text = ""
-            secondRow2.text = ""
-            secondRow3.text = ""
+            binding.secondRow1.text = ""
+            binding.secondRow2.text = ""
+            binding.secondRow3.text = ""
 
-            thirdRow1.text = ""
-            thirdRow2.text = ""
-            thirdRow3.text = ""
-            repeat.visibility = View.GONE
+            binding.thirdRow1.text = ""
+            binding.thirdRow2.text = ""
+            binding.thirdRow3.text = ""
+            binding.repeat.visibility = View.GONE
         }
 
         fun checkWinner(player: String): Boolean {
-            if (firsTrow1.text == player && firsTrow2.text == player && firsTrow3.text == player) return true
-            if (secondRow1.text == player && secondRow2.text == player && secondRow3.text == player) return true
-            if (thirdRow1.text == player && thirdRow2.text == player && thirdRow3.text == player) return true
+            if (binding.firsTrow1.text == player && binding.firsTrow2.text == player && binding.firsTrow3.text == player) return true
+            if (binding.secondRow1.text == player && binding.secondRow2.text == player && binding.secondRow3.text == player) return true
+            if (binding.thirdRow1.text == player && binding.thirdRow2.text == player && binding.thirdRow3.text == player) return true
 
-            if (firsTrow1.text == player && secondRow1.text == player && thirdRow1.text == player) return true
-            if (firsTrow2.text == player && secondRow2.text == player && thirdRow2.text == player) return true
-            if (firsTrow3.text == player && secondRow3.text == player && thirdRow3.text == player) return true
+            if (binding.firsTrow1.text == player && binding.secondRow1.text == player && binding.thirdRow1.text == player) return true
+            if (binding.firsTrow2.text == player && binding.secondRow2.text == player && binding.thirdRow2.text == player) return true
+            if (binding.firsTrow3.text == player && binding.secondRow3.text == player && binding.thirdRow3.text == player) return true
 
-            if (firsTrow1.text == player && secondRow2.text == player && thirdRow3.text == player) return true
-            if (firsTrow3.text == player && secondRow2.text == player && thirdRow1.text == player) return true
+            if (binding.firsTrow1.text == player && binding.secondRow2.text == player && binding.thirdRow3.text == player) return true
+            if (binding.firsTrow3.text == player && binding.secondRow2.text == player && binding.thirdRow1.text == player) return true
 
             return false
         }
 
         fun checkForDraw(player: String): Boolean {
-            if (firsTrow1.text.isNotEmpty() && firsTrow2.text.isNotEmpty() && firsTrow3.text.isNotEmpty() &&
-                secondRow1.text.isNotEmpty() && secondRow2.text.isNotEmpty() && secondRow3.text.isNotEmpty() &&
-                thirdRow1.text.isNotEmpty() && thirdRow2.text.isNotEmpty() && thirdRow3.text.isNotEmpty()
-            ) return true
+            if (binding.firsTrow1.text.isNotEmpty() && binding.firsTrow2.text.isNotEmpty() && binding.firsTrow3.text.isNotEmpty() && binding.secondRow1.text.isNotEmpty() && binding.secondRow2.text.isNotEmpty() && binding.secondRow3.text.isNotEmpty() && binding.thirdRow1.text.isNotEmpty() && binding.thirdRow2.text.isNotEmpty() && binding.thirdRow3.text.isNotEmpty()) {
+                return true
+
+            }
 
             return false
         }
 
         val buttons = listOf(
-            firsTrow1,
-            firsTrow2,
-            firsTrow3,
-            secondRow1,
-            secondRow2,
-            secondRow3,
-            thirdRow1,
-            thirdRow2,
-            thirdRow3
+            binding.firsTrow1,
+            binding.firsTrow2,
+            binding.firsTrow3,
+            binding.secondRow1,
+            binding.secondRow2,
+            binding.secondRow3,
+            binding.thirdRow1,
+            binding.thirdRow2,
+            binding.thirdRow3
         )
 
         buttons.forEach { button ->
@@ -103,21 +95,26 @@ open class MainActivity : AppCompatActivity() {
                 }
 
                 if (checkWinner("X")) {
-                    Snackbar.make(findViewById(android.R.id.content), "Player for X win", Snackbar.LENGTH_LONG).show()
-                    repeat.visibility = View.VISIBLE
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Player for X wins",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    binding.repeat.visibility = View.VISIBLE
                     checker = false
                 } else if (checkWinner("O")) {
-                    Snackbar.make(findViewById(android.R.id.content), "Player for O win", Snackbar.LENGTH_LONG).show()
-                    repeat.visibility = View.VISIBLE
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Player for O wins",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    binding.repeat.visibility = View.VISIBLE
                     checker = false
-                }
-                if (checkForDraw("X")) {
-                    Snackbar.make(findViewById(android.R.id.content), "Draw", Snackbar.LENGTH_LONG).show()
-                    repeat.visibility = View.VISIBLE
-                    checker = false
-                }else if (checkForDraw("O")) {
-                    Snackbar.make(findViewById(android.R.id.content), "Draw", Snackbar.LENGTH_LONG).show()
-                    repeat.visibility = View.VISIBLE
+                } else if (checkForDraw("")) { // Если никто не выиграл, проверяем на ничью
+                    Snackbar.make(
+                        findViewById(android.R.id.content), "Draw", Snackbar.LENGTH_LONG
+                    ).show()
+                    binding.repeat.visibility = View.VISIBLE
                     checker = false
                 }
             }
